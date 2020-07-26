@@ -59,10 +59,10 @@ jobs:
               zip -r final/ErfanGSIs-Aonly.zip /home/runner/work/actions_build_ErfanGSIs/actions_build_ErfanGSIs/ErfanGSIs/output/*Aonly*ErfanGSI*
               zip -r final/ErfanGSIs-AB.zip /home/runner/work/actions_build_ErfanGSIs/actions_build_ErfanGSIs/ErfanGSIs/output/*AB*ErfanGSI*
        
-       - name: Upload GSI to CowTransfer
+       - name: Upload GSI to WeTransfer
          run: |
               curl -sL https://git.io/file-transfer | sh
-              ./transfer cow final/ErfanGSIs-Aonly.zip
-              ./transfer cow final/ErfanGSIs-AB.zip
+              ./transfer wet final/ErfanGSIs-Aonly.zip
+              ./transfer wet final/ErfanGSIs-AB.zip
          
             
