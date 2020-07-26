@@ -61,7 +61,7 @@ jobs:
        - name: Upload GSI to WenShuShu
          run: |
               curl -sL https://git.io/file-transfer | sh
-              ./transfer WenShuShu final/GSI.zip
+              ./transfer wss final/GSI.zip
 
          
             
