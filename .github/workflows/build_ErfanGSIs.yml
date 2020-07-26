@@ -55,13 +55,14 @@ jobs:
        
        - name: Zip GSI  
          run: |
-              #mkdir final
-              #zip -r final/GSI.zip /home/runner/work/actions_build_ErfanGSIs/actions_build_ErfanGSIs/ErfanGSIs/output/
+              mkdir final
+              zip -r final/ErfanGSIs-Aonly.zip /home/runner/work/actions_build_ErfanGSIs/actions_build_ErfanGSIs/ErfanGSIs/output/*Aonly*ErfanGSI*
+              zip -r final/ErfanGSIs-AB.zip /home/runner/work/actions_build_ErfanGSIs/actions_build_ErfanGSIs/ErfanGSIs/output/*AB*ErfanGSI*
        
        - name: Upload GSI to CowTransfer
          run: |
               curl -sL https://git.io/file-transfer | sh
-              ./transfer cow /home/runner/work/actions_build_ErfanGSIs/actions_build_ErfanGSIs/ErfanGSIs/output/*Aonly*ErfanGSI.img
-              ./transfer cow /home/runner/work/actions_build_ErfanGSIs/actions_build_ErfanGSIs/ErfanGSIs/output/*AB*ErfanGSI.img
+              ./transfer cow final/ErfanGSIs-Aonly.zip
+              ./transfer cow final/ErfanGSIs-AB.zip
          
             
