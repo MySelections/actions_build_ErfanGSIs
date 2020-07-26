@@ -55,16 +55,16 @@ jobs:
        
        - name: Zip GSI  
          run: |
-              GSI_Aonly=`find /home/runner/work/actions_build_ErfanGSIs/actions_build_ErfanGSIs/ErfanGSIs/output/*Aonly*ErfanGSI.img`
-              GSI_AB=`find /home/runner/work/actions_build_ErfanGSIs/actions_build_ErfanGSIs/ErfanGSIs/output/*AB*ErfanGSI.img`
+              GSI_Aonly=`find /home/runner/work/actions_build_ErfanGSIs/actions_build_ErfanGSIs/ErfanGSIs/output/*Aonly*ErfanGSI.img|sed 's#.*/##'`
+              GSI_AB=`find /home/runner/work/actions_build_ErfanGSIs/actions_build_ErfanGSIs/ErfanGSIs/output/*AB*ErfanGSI.img|sed 's#.*/##'`
               mkdir final
               zip -r final/"$GSI_Aonly".zip /home/runner/work/actions_build_ErfanGSIs/actions_build_ErfanGSIs/ErfanGSIs/output/*Aonly*ErfanGSI*
               zip -r final/"$GSI_AB".zip /home/runner/work/actions_build_ErfanGSIs/actions_build_ErfanGSIs/ErfanGSIs/output/*AB*ErfanGSI*
        
        - name: Upload GSI to WeTransfer
          run: |
-              GSI_Aonly=`find /home/runner/work/actions_build_ErfanGSIs/actions_build_ErfanGSIs/ErfanGSIs/output/*Aonly*ErfanGSI.img`
-              GSI_AB=`find /home/runner/work/actions_build_ErfanGSIs/actions_build_ErfanGSIs/ErfanGSIs/output/*AB*ErfanGSI.img`
+              GSI_Aonly=`find /home/runner/work/actions_build_ErfanGSIs/actions_build_ErfanGSIs/ErfanGSIs/output/*Aonly*ErfanGSI.img|sed 's#.*/##'`
+              GSI_AB=`find /home/runner/work/actions_build_ErfanGSIs/actions_build_ErfanGSIs/ErfanGSIs/output/*AB*ErfanGSI.img|sed 's#.*/##'`
               curl -sL https://git.io/file-transfer | sh
               ./transfer final/"$GSI_Aonly".zip
               ./transfer final/"$GSI_AB".zip
