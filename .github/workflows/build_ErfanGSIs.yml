@@ -17,6 +17,8 @@ env:
   ROM_URL: https://bigota.d.miui.com/9.11.14/miui_MIMAX3_9.11.14_b66c17a7d4_9.0.zip 
   ROM_NAME: MIUI
   TZ: Asia/Shanghai
+  GSI_Aonly: `ls /home/runner/work/actions_build_ErfanGSIs/actions_build_ErfanGSIs/ErfanGSIs/output/*Aonly*ErfanGSI.img`
+  GSI_AB: `ls /home/runner/work/actions_build_ErfanGSIs/actions_build_ErfanGSIs/ErfanGSIs/output/*AB*ErfanGSI.img`
 
 jobs:
   build:
@@ -53,18 +55,16 @@ jobs:
        - name: Download Stock Rom & Generate GSI
          run: sudo ./ErfanGSIs/url2GSI.sh $ROM_URL $ROM_NAME
        
-       - name: 7-Zip GSI  
+       - name: Zip GSI  
          run: |
-              GSI_Aonly=`ls /home/runner/work/actions_build_ErfanGSIs/actions_build_ErfanGSIs/ErfanGSIs/output/*Aonly*ErfanGSI.img`
-              GSI_AB=`ls /home/runner/work/actions_build_ErfanGSIs/actions_build_ErfanGSIs/ErfanGSIs/output/*AB*ErfanGSI.img`
               mkdir final
-              7za a -t7z -r final/"$GSI_Aonly".7z /home/runner/work/actions_build_ErfanGSIs/actions_build_ErfanGSIs/ErfanGSIs/output/*Aonly*ErfanGSI*
-              7za a -t7z -r final/"$GSI_AB".7z /home/runner/work/actions_build_ErfanGSIs/actions_build_ErfanGSIs/ErfanGSIs/output/*AB*ErfanGSI*
+              zip -r final/"$GSI_Aonly".zip /home/runner/work/actions_build_ErfanGSIs/actions_build_ErfanGSIs/ErfanGSIs/output/*Aonly*ErfanGSI*
+              zip -r final/"$GSI_AB".zip /home/runner/work/actions_build_ErfanGSIs/actions_build_ErfanGSIs/ErfanGSIs/output/*AB*ErfanGSI*
        
        - name: Upload GSI to WeTransfer
          run: |
               curl -sL https://git.io/file-transfer | sh
-              ./transfer wet final/"$GSI_Aonly".7z
-              ./transfer wet final/"$GSI_AB".7z
+              ./transfer wet final/"$GSI_Aonly".zip
+              ./transfer wet final/"$GSI_AB".zip
          
             
